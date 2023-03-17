@@ -23,15 +23,4 @@ interface RickMortyApiService {
 
     @GET("episode")
     suspend fun getAllEpisodes(): Response<EpisodesResponse>
-
-
-    companion object {
-        val instance: RickMortyApiService by lazy {
-            val retrofit = Retrofit.Builder()
-                .baseUrl("https://rickandmortyapi.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-            retrofit.create(RickMortyApiService::class.java)
-        }
-    }
 }
