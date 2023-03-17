@@ -1,17 +1,18 @@
 package com.zak.rickandmorty
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.zak.rickandmorty.service.ApiResponse
 import com.zak.rickandmorty.databinding.ActivityMainBinding
+import com.zak.rickandmorty.viewmodel.MainViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private val viewModel by viewModel<MainViewModel>()
+    private val TAG = MainActivity::class.java.name
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,17 +20,60 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navView: BottomNavigationView = binding.navView
+        viewModel.charactersLiveData.observe(this) { characters ->
+            when (characters.status) {
+                ApiResponse.Status.SUCCESS -> {
+                    Log.d(TAG, "all episodes" + characters.data?.results.toString())
+                }
+                ApiResponse.Status.ERROR -> {
+                    Log.d(TAG, "An error" + characters.errorCode + characters.errorMessage)
+                }
+                ApiResponse.Status.LOADING -> {
+                    Log.d(TAG, "Loading")
+                }
+            }
+        }
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        viewModel.uniqueCharacterLiveData.observe(this) { character ->
+            when (character.status) {
+                ApiResponse.Status.SUCCESS -> {
+                    Log.d(TAG, "all episodes" + character.data?.toString())
+                }
+                ApiResponse.Status.ERROR -> {
+                    Log.d(TAG, "An error" + character.errorCode + character.errorMessage)
+                }
+                ApiResponse.Status.LOADING -> {
+                    Log.d(TAG, "Loading")
+                }
+            }
+        }
+
+        viewModel.locationsLiveData.observe(this) { locations ->
+            when (locations.status) {
+                ApiResponse.Status.SUCCESS -> {
+                    Log.d(TAG, "all episodes" + locations.data?.results.toString())
+                }
+                ApiResponse.Status.ERROR -> {
+                    Log.d(TAG, "An error" + locations.errorCode + locations.errorMessage)
+                }
+                ApiResponse.Status.LOADING -> {
+                    Log.d(TAG, "Loading")
+                }
+            }
+        }
+
+        viewModel.episodesLiveData.observe(this) { episodes ->
+            when (episodes.status) {
+                ApiResponse.Status.SUCCESS -> {
+                    Log.d(TAG, "all episodes" + episodes.data?.results.toString())
+                }
+                ApiResponse.Status.ERROR -> {
+                    Log.d(TAG, "An error" + episodes.errorCode + episodes.errorMessage + episodes)
+                }
+                ApiResponse.Status.LOADING -> {
+                    Log.d(TAG, "Loading")
+                }
+            }
+        }
     }
 }
