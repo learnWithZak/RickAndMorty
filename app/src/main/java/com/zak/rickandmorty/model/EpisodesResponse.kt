@@ -1,8 +1,7 @@
 package com.zak.rickandmorty.model
 
 data class EpisodesResponse(
-	val info: Info,
-	val results: List<Episode>
+	val results: List<Episode> = emptyList()
 )
 
 data class Episode(

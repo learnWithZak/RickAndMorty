@@ -1,15 +1,9 @@
 package com.zak.rickandmorty.model
 
-data class CharactersResponse(
-	val info: Info,
-	val results: List<Character>
-)
+import java.io.Serializable
 
-data class Info(
-	val count: Int,
-	val pages: Int,
-	val next: String?,
-	val prev: String?
+data class CharactersResponse(
+	val results: List<Character> = emptyList()
 )
 
 data class Character(
@@ -23,4 +17,4 @@ data class Character(
 	val episode: List<String>,
 	val url: String,
 	val created: String
-)
+) : Serializable

@@ -1,8 +1,7 @@
 package com.zak.rickandmorty.model
 
 data class LocationsResponse(
-	val info: Info,
-	val results: List<Location>
+	val results: List<Location> = emptyList()
 )
 
 data class Location(
