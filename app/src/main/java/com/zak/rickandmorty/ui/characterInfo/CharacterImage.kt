@@ -1,4 +1,4 @@
-package com.zak.rickandmorty.ui.character
+package com.zak.rickandmorty.ui.characterInfo
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height

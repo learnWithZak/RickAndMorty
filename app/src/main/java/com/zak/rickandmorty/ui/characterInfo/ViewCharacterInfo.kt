@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.zak.rickandmorty.model.Character
-import com.zak.rickandmorty.ui.character.CharacterImage
 
 @Composable
 fun ViewCharacterInfo(character: Character) {
