@@ -12,11 +12,15 @@ import com.zak.rickandmorty.model.EpisodesResponse
 import com.zak.rickandmorty.model.LocationsResponse
 import kotlinx.coroutines.launch
 import com.zak.rickandmorty.service.ApiResponse.Status.LOADING
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 class MainViewModel(private val repository: RemoteDataRepository) : ViewModel() {
 
-	private val _charactersLiveData = MutableLiveData<ApiResponse<CharactersResponse>>()
-	val charactersLiveData: LiveData<ApiResponse<CharactersResponse>> = _charactersLiveData
+	private val _state = MutableStateFlow(ApiResponse<CharactersResponse>(LOADING, null))
+	val state: StateFlow<ApiResponse<CharactersResponse>>
+		get() = _state
 
 	private val _uniqueCharacterLiveData = MutableLiveData<ApiResponse<Character>>()
 	val uniqueCharacterLiveData: LiveData<ApiResponse<Character>> = _uniqueCharacterLiveData
@@ -36,9 +40,9 @@ class MainViewModel(private val repository: RemoteDataRepository) : ViewModel() 
 	}
 
 	private fun getAllCharacters() {
-		_charactersLiveData.value = ApiResponse(LOADING, null)
+		_state.value = ApiResponse(LOADING, null)
 		viewModelScope.launch {
-			_charactersLiveData.value = repository.getAllCharacters()
+			_state.value = repository.getAllCharacters()
 		}
 	}
 
