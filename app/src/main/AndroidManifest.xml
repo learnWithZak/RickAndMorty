@@ -13,12 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RickAndMorty">
         <activity
-            android:name=".InfoActivity"
+            android:name=".ui.activity.InfoActivity"
             android:exported="true"
             android:label="@string/title_activity_info"
             android:theme="@style/Theme.RickAndMorty.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.activity.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.RickAndMorty.NoActionBar">
             <intent-filter>
