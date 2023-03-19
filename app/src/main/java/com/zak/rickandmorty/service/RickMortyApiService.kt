@@ -15,9 +15,6 @@ interface RickMortyApiService {
     @GET("character")
     suspend fun getAllCharacters(): Response<CharactersResponse>
 
-    @GET("character/{id}")
-    suspend fun getCharacterById(@Path("id") id: Int): Response<Character>
-
     @GET("location")
     suspend fun getAllLocations(): Response<LocationsResponse>
 

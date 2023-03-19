@@ -1,6 +1,5 @@
 package com.zak.rickandmorty.repository
 
-import com.zak.rickandmorty.model.Character
 import com.zak.rickandmorty.model.CharactersResponse
 import com.zak.rickandmorty.model.EpisodesResponse
 import com.zak.rickandmorty.model.LocationsResponse
@@ -13,11 +12,6 @@ class RemoteDataRepositoryImpl(private val rickAndMortyApi: RickMortyApiService)
 	override suspend fun getAllCharacters(): ApiResponse<CharactersResponse> =
 		handleApiResponse {
 			rickAndMortyApi.getAllCharacters()
-		}
-
-	override suspend fun getCharacterById(id: Int): ApiResponse<Character> =
-		handleApiResponse {
-			rickAndMortyApi.getCharacterById(id)
 		}
 
 	override suspend fun getAllLocations(): ApiResponse<LocationsResponse> =
