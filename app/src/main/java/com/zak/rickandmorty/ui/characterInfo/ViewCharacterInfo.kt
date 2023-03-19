@@ -49,12 +49,27 @@ fun ViewCharacterInfo(character: Character) {
 			)
 			Spacer(modifier = Modifier.height(16.dp))
 			Text(
+				text = "id: ${character.id}",
+				style = MaterialTheme.typography.h5
+			)
+			Spacer(modifier = Modifier.height(16.dp))
+			Text(
+				text = "name: ${character.name}",
+				style = MaterialTheme.typography.h5
+			)
+			Spacer(modifier = Modifier.height(16.dp))
+			Text(
 				text = "status: ${character.status}",
 				style = MaterialTheme.typography.h5
 			)
 			Spacer(modifier = Modifier.height(16.dp))
 			Text(
 				text = "species: ${character.species}",
+				style = MaterialTheme.typography.h5
+			)
+			Spacer(modifier = Modifier.height(16.dp))
+			Text(
+				text = "type: ${character.type.ifEmpty { "UNKNOWN" }}",
 				style = MaterialTheme.typography.h5
 			)
 			Spacer(modifier = Modifier.height(16.dp))
